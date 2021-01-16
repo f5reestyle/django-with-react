@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Third-pary Apps
     "debug_toolbar",
+    "bootstrap4",
+    'django_pydenticon',
     # Local Apps
+    "accounts",
 ]
 
 MIDDLEWARE = [
@@ -89,9 +92,12 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = "accounts.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
+
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -140,3 +146,13 @@ INTERNAL_IPS = [
     '127.0.0.1',
 
 ]
+# EMAIL & SENDGRID
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
+LOGIN_REDIRECT_URL='/'  # not /accounts/profile/
